@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "babel": "latest",
+    "babel-loader": "latest",
+    "babel-preset-es2015": "latest",
+    "css-loader": "latest",
+    "file-loader": "latest",
+    "html-webpack-plugin": "^2.17.0",
+    "materialize-css": "latest",
+    "postcss-loader": "latest",
+    "precss": "latest",
+    "resolve-url": "latest",
+    "style-loader": "latest",
+    "url-loader": "latest",
+    "webpack": "latest",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0"
+  },
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack-dev-server  --port 8098 --host 'localhost' --hot --content-base ./dist/ --config ./webpack.config.js --hot",
+    "dist": "./node_modules/.bin/webpack --config ./webpack.stage.js",
+    "serve": "./node_modules/.bin/webpack-dev-server  --port 8098 --host 'localhost' --hot --content-base ./dist/ --config ./webpack.stage.js --hot"
+  }
+}
