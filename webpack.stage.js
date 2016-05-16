@@ -68,7 +68,7 @@ module.exports = {
   debug: true,
   output: {
     path: outputPath,
-    filename: 'bundle.js',
+    filename: 'main.js',
     publicPath: './dist/'
   },
   module: {
@@ -102,7 +102,7 @@ module.exports = {
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true
     }),
-    new webpack.optimize.CommonsChunkPlugin('main', 'bundle.js'),
+    new webpack.optimize.CommonsChunkPlugin('main', 'main.js'),
     // new ExtractTextPlugin("styles/main.css"),
     new webpack.optimize.UglifyJsPlugin(),
   // new webpack.ProvidePlugin({

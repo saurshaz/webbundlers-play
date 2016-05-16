@@ -47,31 +47,30 @@
 //   ],
 
 //   module: {
-
 var path = require('path')
 var webpack = require('webpack')
 var fs = require('fs')
+var outputPath = path.resolve(__dirname, './dist')
 // process.env.HOST='188.166.230.193'
 var host = process.env.HOST || '0.0.0.0'
 var port = 8098 || parseInt(process.env.PORT, 10)
 
 module.exports = {
-  target: 'node',
+  target: 'web',
   devtool: 'cheap-module-eval-source-map',
   entry: {
     'main': [
-      // 'webpack/hot/dev-server/app/config/main.js',
       'webpack-dev-server/client?http://' + host + ':' + port + '/main.js', // WebpackDevServer host and port
       'webpack/hot/dev-server?http://' + host + ':' + port + '/main.js', // WebpackDevServer host and port
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/main.js',
       './app/scripts/index.js'
-
     ]
   },
 
   debug: true,
   output: {
-    filename: 'bundle.js',
+    path: outputPath,
+    filename: 'main.js',
     publicPath: 'http://' + host + ':' + port + '/'
   },
   module: {
@@ -79,16 +78,21 @@ module.exports = {
       {
         loader: 'babel-loader',
         test: /\.js$/,
-        include: /scripts/,
         exclude: /node_modules/,
         presets: ['es2015']
+      },
+      {
+        loader: 'file?name=/dist[name].html',
+        test: /\.html$/
       }
     ]
+  //   }
+  // }
   },
   resolve: {
     extensions: ['', '.react.js', '.js', '.jsx', '.scss'],
     modulesDirectories: [
-      'app/scripts', 'node_modules'
+      'source', 'node_modules'
     ]
   },
   plugins: [
@@ -100,7 +104,7 @@ module.exports = {
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true
     }),
-    new webpack.optimize.CommonsChunkPlugin('main', 'bundle.js'),
+    new webpack.optimize.CommonsChunkPlugin('main', 'main.js'),
     // new ExtractTextPlugin("styles/main.css"),
     new webpack.optimize.UglifyJsPlugin(),
   // new webpack.ProvidePlugin({
