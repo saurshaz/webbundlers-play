@@ -60,9 +60,9 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
     'main': [
-      'webpack-dev-server/client?http://' + host + ':' + port + '/main.js', // WebpackDevServer host and port
-      'webpack/hot/dev-server?http://' + host + ':' + port + '/main.js', // WebpackDevServer host and port
-      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/main.js',
+      'webpack-dev-server/client?http://' + host + ':' + port + '/modules.js', // WebpackDevServer host and port
+      'webpack/hot/dev-server?http://' + host + ':' + port + '/modules.js', // WebpackDevServer host and port
+      'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/modules.js',
       './app/scripts/index.js'
     ]
   },
@@ -70,14 +70,18 @@ module.exports = {
   debug: true,
   output: {
     path: outputPath,
-    filename: 'main.js',
-    publicPath: 'http://' + host + ':' + port + '/'
+    filename: 'modules.js',
+    publicPath: 'http://' + host + ':' + port + '/',
+    // export itself to a global var
+    libraryTarget: 'var',
+    // name of the global var: "Foo"
+    library: 'appler'
   },
   module: {
     loaders: [
       {
         loader: 'babel-loader',
-        test: /\.js$/,
+        test: /\.js|\.html$/,
         exclude: /node_modules/,
         presets: ['es2015']
       },
@@ -92,7 +96,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.react.js', '.js', '.jsx', '.scss'],
     modulesDirectories: [
-      'source', 'node_modules'
+      'dist/html', 'node_modules'
     ]
   },
   plugins: [
@@ -104,9 +108,9 @@ module.exports = {
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true
     }),
-    new webpack.optimize.CommonsChunkPlugin('main', 'main.js'),
-    // new ExtractTextPlugin("styles/main.css"),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin('main', 'modules.js'),
+  // new ExtractTextPlugin("styles/main.css"),
+  // new webpack.optimize.UglifyJsPlugin(),
   // new webpack.ProvidePlugin({
   //   riot: 'riot'
   // })

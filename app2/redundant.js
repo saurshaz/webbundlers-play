@@ -1,0 +1,6 @@
+'use strict'
+import './css/vendors.css'
+import './css/application.css'
+import 'materialize-css/dist/js/materialize.js'
+import './index.html'
+import './app/scripts/index.js'

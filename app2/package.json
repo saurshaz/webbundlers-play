@@ -18,8 +18,8 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server  --port 8098 --host 'localhost' --hot --content-base ./dist/ --config ./webpack.config.js --hot",
-    "dist": "./node_modules/.bin/webpack --config ./webpack.stage.js",
-    "serve": "./node_modules/.bin/webpack-dev-server  --port 8098 --host 'localhost' --hot --content-base ./dist/ --config ./webpack.stage.js --hot"
+    "dev": "../../node_modules/.bin/webpack-dev-server  --port 8099 --host 'localhost' --hot --content-base ./dist/ --config ./webpack.config.js --hot",
+    "dist": "../../node_modules/.bin/webpack --config ./webpack.stage.js",
+    "serve": "../../node_modules/.bin/webpack-dev-server  --port 8099 --host 'localhost' --hot --content-base ./dist/ --config ./webpack.stage.js --hot"
   }
 }
